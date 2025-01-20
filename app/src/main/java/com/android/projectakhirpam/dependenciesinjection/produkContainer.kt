@@ -16,42 +16,29 @@ interface AppContainer {
 
 class ApplicationsContainer : AppContainer {
 
-    // Base URL untuk setiap layanan
     private val baseUrl = "http://10.0.2.2:3000/api/"
-
     private val json = Json {
         ignoreUnknownKeys = true
     }
 
-    // Fungsi untuk membuat Retrofit instance
-    private fun createRetrofit(baseUrl: String): Retrofit {
-        return Retrofit.Builder()
-            .addConverterFactory(json.asConverterFactory("application/json".toMediaType()))
-            .baseUrl(baseUrl)
-            .build()
-    }
+    private val retrofit: Retrofit = Retrofit.Builder()
+        .addConverterFactory(json.asConverterFactory("application/json".toMediaType()))
+        .baseUrl(baseUrl)
+        .build()
 
-    // Retrofit instances untuk setiap layanan
-    private val retrofitProduk: Retrofit = createRetrofit("produk/")
-    private val retrofitKategori: Retrofit = createRetrofit("kategori/")
-    private val retrofitPemasok: Retrofit = createRetrofit("pemasok/")
-    private val retrofitMerk: Retrofit = createRetrofit("merk/")
-
-    // Service instances
     private val produkService: produkService by lazy {
-        retrofitProduk.create(produkService::class.java)
+        retrofit.create(produkService::class.java)
     }
     private val kategoriService: kategoriService by lazy {
-        retrofitKategori.create(kategoriService::class.java)
+        retrofit.create(kategoriService::class.java)
     }
     private val pemasokService: pemasokService by lazy {
-        retrofitPemasok.create(pemasokService::class.java)
+        retrofit.create(pemasokService::class.java)
     }
     private val merkService: merkService by lazy {
-        retrofitMerk.create(merkService::class.java)
+        retrofit.create(merkService::class.java)
     }
 
-    // Repository instances
     override val produkRepository: ProdukRepository by lazy {
         NetworkProdukRepository(produkService)
     }
