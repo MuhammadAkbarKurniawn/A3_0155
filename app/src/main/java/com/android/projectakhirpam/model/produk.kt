@@ -85,3 +85,51 @@ data class ProdukDetailResponse(
     val message: String,
     val data: Produk
 )
+
+// Response untuk semua kategori
+@Serializable
+data class AllKategoriResponse(
+    val status: Boolean,
+    val message: String,
+    val data: List<Kategori>
+)
+
+// Response untuk detail kategori
+@Serializable
+data class KategoriDetailResponse(
+    val status: Boolean,
+    val message: String,
+    val data: Kategori
+)
+
+// Response untuk semua pemasok
+@Serializable
+data class AllPemasokResponse(
+    val status: Boolean,
+    val message: String,
+    val data: List<Pemasok>
+)
+
+// Response untuk detail pemasok
+@Serializable
+data class PemasokDetailResponse(
+    val status: Boolean,
+    val message: String,
+    val data: Pemasok
+)
+
+// Response untuk semua merk
+@Serializable
+data class AllMerkResponse(
+    val status: Boolean,
+    val message: String,
+    val data: List<Merk>
+)
+
+// Response untuk detail merk
+@Serializable
+data class MerkDetailResponse(
+    val status: Boolean,
+    val message: String,
+    val data: Merk
+)
