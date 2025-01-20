@@ -28,13 +28,13 @@ interface produkService {
 
     // @GET("baca1produk.php")
     @GET("{id}")
-    suspend fun getProdukById(@Path("id") idProduk: Int): ProdukDetailResponse
+    suspend fun getProdukById(@Path("id") idProduk: String): ProdukDetailResponse
 
     // @PUT("editproduk.php")
     @PUT("{id}")
-    suspend fun updateProduk(@Path("id") idProduk: Int, @Body produk: Produk)
+    suspend fun updateProduk(@Path("id") idProduk: String, @Body produk: Produk)
 
     // @DELETE("deleteproduk.php")
     @DELETE("{id}")
-    suspend fun deleteProduk(@Path("id") idProduk: Int): Response<Void>
+    suspend fun deleteProduk(@Path("id") idProduk: String): Response<Void>
 }

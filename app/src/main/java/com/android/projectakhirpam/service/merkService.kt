@@ -25,11 +25,11 @@ interface merkService {
     suspend fun getAllMerk(): AllMerkResponse
 
     @GET("{id}")
-    suspend fun getMerkById(@Path("id") idMerk: Int): MerkDetailResponse
+    suspend fun getMerkById(@Path("id") idMerk: String): MerkDetailResponse
 
     @PUT("{id}")
-    suspend fun updateMerk(@Path("id") idMerk: Int, @Body merk: Merk)
+    suspend fun updateMerk(@Path("id") idMerk: String, @Body merk: Merk)
 
     @DELETE("{id}")
-    suspend fun deleteMerk(@Path("id") idMerk: Int): Response<Void>
+    suspend fun deleteMerk(@Path("id") idMerk: String): Response<Void>
 }

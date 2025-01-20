@@ -11,11 +11,11 @@ interface PemasokRepository {
 
     suspend fun insertPemasok(pemasok: Pemasok)
 
-    suspend fun updatePemasok(idPemasok: Int, pemasok: Pemasok)
+    suspend fun updatePemasok(idPemasok: String, pemasok: Pemasok)
 
-    suspend fun deletePemasok(idPemasok: Int)
+    suspend fun deletePemasok(idPemasok: String)
 
-    suspend fun getPemasokById(idPemasok: Int): Pemasok
+    suspend fun getPemasokById(idPemasok: String): Pemasok
 }
 
 class NetworkPemasokRepository(
@@ -29,11 +29,11 @@ class NetworkPemasokRepository(
         pemasokApiService.insertPemasok(pemasok)
     }
 
-    override suspend fun updatePemasok(idPemasok: Int, pemasok: Pemasok) {
+    override suspend fun updatePemasok(idPemasok: String, pemasok: Pemasok) {
         pemasokApiService.updatePemasok(idPemasok, pemasok)
     }
 
-    override suspend fun deletePemasok(idPemasok: Int) {
+    override suspend fun deletePemasok(idPemasok: String) {
         try {
             val response = pemasokApiService.deletePemasok(idPemasok)
             if (!response.isSuccessful) {
@@ -49,7 +49,7 @@ class NetworkPemasokRepository(
         }
     }
 
-    override suspend fun getPemasokById(idPemasok: Int): Pemasok {
+    override suspend fun getPemasokById(idPemasok: String): Pemasok {
         return try {
             pemasokApiService.getPemasokById(idPemasok).data
         } catch (e: Exception) {

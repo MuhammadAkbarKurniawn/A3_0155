@@ -10,11 +10,11 @@ interface MerkRepository {
 
     suspend fun insertMerk(merk: Merk)
 
-    suspend fun updateMerk(idMerk: Int, merk: Merk)
+    suspend fun updateMerk(idMerk: String, merk: Merk)
 
-    suspend fun deleteMerk(idMerk: Int)
+    suspend fun deleteMerk(idMerk: String)
 
-    suspend fun getMerkById(idMerk: Int): Merk
+    suspend fun getMerkById(idMerk: String): Merk
 }
 
 class NetworkMerkRepository(
@@ -28,11 +28,11 @@ class NetworkMerkRepository(
         merkApiService.insertMerk(merk)
     }
 
-    override suspend fun updateMerk(idMerk: Int, merk: Merk) {
+    override suspend fun updateMerk(idMerk: String, merk: Merk) {
         merkApiService.updateMerk(idMerk, merk)
     }
 
-    override suspend fun deleteMerk(idMerk: Int) {
+    override suspend fun deleteMerk(idMerk: String) {
         try {
             val response = merkApiService.deleteMerk(idMerk)
             if (!response.isSuccessful) {
@@ -48,7 +48,7 @@ class NetworkMerkRepository(
         }
     }
 
-    override suspend fun getMerkById(idMerk: Int): Merk {
+    override suspend fun getMerkById(idMerk: String): Merk {
         return try {
             merkApiService.getMerkById(idMerk).data
         } catch (e: Exception) {

@@ -23,11 +23,11 @@ interface kategoriService {
     suspend fun getAllKategori(): AllKategoriResponse
 
     @GET("{id}")
-    suspend fun getKategoriById(@Path("id") idKategori: Int): KategoriDetailResponse
+    suspend fun getKategoriById(@Path("id") idKategori: String): KategoriDetailResponse
 
     @PUT("{id}")
-    suspend fun updateKategori(@Path("id") idKategori: Int, @Body kategori: Kategori)
+    suspend fun updateKategori(@Path("id") idKategori: String, @Body kategori: Kategori)
 
     @DELETE("{id}")
-    suspend fun deleteKategori(@Path("id") idKategori: Int): Response<Void>
+    suspend fun deleteKategori(@Path("id") idKategori: String): Response<Void>
 }

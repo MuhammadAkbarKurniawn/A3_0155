@@ -23,11 +23,11 @@ interface pemasokService {
     suspend fun getAllPemasok(): AllPemasokResponse
 
     @GET("{id}")
-    suspend fun getPemasokById(@Path("id") idPemasok: Int): PemasokDetailResponse
+    suspend fun getPemasokById(@Path("id") idPemasok: String): PemasokDetailResponse
 
     @PUT("{id}")
-    suspend fun updatePemasok(@Path("id") idPemasok: Int, @Body pemasok: Pemasok)
+    suspend fun updatePemasok(@Path("id") idPemasok: String, @Body pemasok: Pemasok)
 
     @DELETE("{id}")
-    suspend fun deletePemasok(@Path("id") idPemasok: Int): Response<Void>
+    suspend fun deletePemasok(@Path("id") idPemasok: String): Response<Void>
 }

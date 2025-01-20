@@ -11,11 +11,11 @@ interface ProdukRepository {
 
     suspend fun insertProduk(produk: Produk)
 
-    suspend fun updateProduk(idProduk: Int, produk: Produk)
+    suspend fun updateProduk(idProduk: String, produk: Produk)
 
-    suspend fun deleteProduk(idProduk: Int)
+    suspend fun deleteProduk(idProduk: String)
 
-    suspend fun getProdukById(idProduk: Int): Produk
+    suspend fun getProdukById(idProduk: String): Produk
 }
 
 class NetworkProdukRepository(
@@ -29,11 +29,11 @@ class NetworkProdukRepository(
         produkApiService.insertProduk(produk)
     }
 
-    override suspend fun updateProduk(idProduk: Int, produk: Produk) {
+    override suspend fun updateProduk(idProduk: String, produk: Produk) {
         produkApiService.updateProduk(idProduk, produk)
     }
 
-    override suspend fun deleteProduk(idProduk: Int) {
+    override suspend fun deleteProduk(idProduk: String) {
         try {
             val response = produkApiService.deleteProduk(idProduk)
             if (!response.isSuccessful) {
@@ -49,7 +49,7 @@ class NetworkProdukRepository(
         }
     }
 
-    override suspend fun getProdukById(idProduk: Int): Produk {
+    override suspend fun getProdukById(idProduk: String): Produk {
         return try {
             produkApiService.getProdukById(idProduk).data
         } catch (e: Exception) {
