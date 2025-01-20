@@ -7,7 +7,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class Produk(
     @SerialName("id_produk")
-    val idProduk: Int,
+    val idProduk: String,
 
     @SerialName("nama_produk")
     val namaProduk: String,
@@ -15,24 +15,24 @@ data class Produk(
     @SerialName("deskripsi_produk")
     val deskripsiProduk: String,
 
-    val harga: Double,
-    val stok: Int,
+    val harga: String,
+    val stok: String,
 
     @SerialName("id_kategori")
-    val idKategori: Int,
+    val idKategori: String,
 
     @SerialName("id_pemasok")
-    val idPemasok: Int,
+    val idPemasok: String,
 
     @SerialName("id_merk")
-    val idMerk: Int
+    val idMerk: String
 )
 
 // Data class untuk Kategori
 @Serializable
 data class Kategori(
     @SerialName("id_kategori")
-    val idKategori: Int,
+    val idKategori: String,
 
     @SerialName("nama_kategori")
     val namaKategori: String,
@@ -45,7 +45,7 @@ data class Kategori(
 @Serializable
 data class Pemasok(
     @SerialName("id_pemasok")
-    val idPemasok: Int,
+    val idPemasok: String,
 
     @SerialName("nama_pemasok")
     val namaPemasok: String,
@@ -61,7 +61,7 @@ data class Pemasok(
 @Serializable
 data class Merk(
     @SerialName("id_merk")
-    val idMerk: Int,
+    val idMerk: String,
 
     @SerialName("nama_merk")
     val namaMerk: String,
