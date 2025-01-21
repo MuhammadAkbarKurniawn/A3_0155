@@ -36,8 +36,8 @@ class DetailViewModel (
         viewModelScope.launch {
             mahasiswaDetailState = DetailUiState.Loading
             mahasiswaDetailState = try {
-                val mahasiswa = produkRepository.getProdukById(_idproduk)
-                DetailUiState.Success(mahasiswa)
+                val produk = produkRepository.getProdukById(_idproduk)
+                DetailUiState.Success(produk)
             } catch (e: IOException) {
                 DetailUiState.Error
             } catch (e: HttpException) {
