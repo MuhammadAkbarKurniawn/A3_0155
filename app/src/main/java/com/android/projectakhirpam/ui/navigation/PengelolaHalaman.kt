@@ -8,7 +8,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.android.projectakhirpam.ui.view.kategori.DestinasiEntryKategori
 import com.android.projectakhirpam.ui.view.kategori.DestinasiHomeKategori
+import com.android.projectakhirpam.ui.view.kategori.EntryKategoriScreen
 import com.android.projectakhirpam.ui.view.kategori.HomeKategoriScreen
 import com.android.projectakhirpam.ui.view.produk.DestinasiDetail
 import com.android.projectakhirpam.ui.view.produk.DestinasiEntry
@@ -105,11 +107,21 @@ fun PengelolaHalaman(
             HomeKategoriScreen(
                 navigateBack = { navController.popBackStack() },
                 navigateToKategoriEntry = {
-                    navController.navigate(DestinasiEntry.route)
+                    navController.navigate(DestinasiEntryKategori.route)
                 }
             )
         }
-
+        composable(DestinasiEntryKategori.route) {
+            EntryKategoriScreen(
+                navigateBack = {
+                    navController.navigate(DestinasiHomeKategori.route){
+                        popUpTo(DestinasiHomeKategori.route){
+                            inclusive = true
+                        }
+                    }
+                }
+            )
+        }
 
     }
 }
