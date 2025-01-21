@@ -1,9 +1,12 @@
 package com.android.projectakhirpam.ui.view.kategori
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -11,11 +14,13 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -26,6 +31,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.android.projectakhirpam.model.Kategori
+import com.android.projectakhirpam.model.Produk
 import com.android.projectakhirpam.ui.customwidget.CostumeTopAppBar
 import com.android.projectakhirpam.ui.navigation.DestinasiNavigasi
 import com.android.projectakhirpam.ui.view.produk.OnError
@@ -45,6 +51,7 @@ fun HomeKategoriScreen(
     navigateBack: () -> Unit,
     navigateToKategoriEntry: () -> Unit,
     modifier: Modifier = Modifier,
+    onDetailClick:(String) -> Unit = {},
     viewModel: KategoriViewModel = viewModel(factory = penyediaViewModel.Factory)
 ) {
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
@@ -75,7 +82,12 @@ fun HomeKategoriScreen(
         KategoriStatus(
             kategoriUiState = viewModel.ktgrUIState,
             retryAction = { viewModel.getKategori() },
-            modifier = Modifier.padding(innerPadding)
+            modifier = Modifier.padding(innerPadding),
+            onDetailClick = onDetailClick,
+            onDeleteClick = {
+                viewModel.deleteKategori(it.idKategori)
+                viewModel.getKategori()
+            }
         )
     }
 }
@@ -84,7 +96,9 @@ fun HomeKategoriScreen(
 fun KategoriStatus(
     kategoriUiState: HomeUiState,
     retryAction: () -> Unit,
-    modifier: Modifier = Modifier
+    onDeleteClick: (Kategori) -> Unit = {},
+    modifier: Modifier = Modifier,
+    onDetailClick: (String) -> Unit = {}
 ) {
     when (kategoriUiState) {
         is HomeUiState.Loading -> OnLoading(modifier = modifier.fillMaxSize())
@@ -99,7 +113,13 @@ fun KategoriStatus(
             } else {
                 KategoriList(
                     kategori = kategoriUiState.kategori,
-                    modifier = modifier.fillMaxWidth()
+                    modifier = modifier.fillMaxWidth(),
+                    onDetailClick = {
+                        onDetailClick(it.idKategori)
+                    },
+                    onDeleteClick = {
+                        onDeleteClick(it)
+                    }
                 )
             }
         }
@@ -110,7 +130,9 @@ fun KategoriStatus(
 @Composable
 fun KategoriList(
     kategori: List<Kategori>,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onDetailClick: (Kategori) -> Unit,
+    onDeleteClick: (Kategori) -> Unit = {}
 ) {
     LazyColumn(
         modifier = modifier,
@@ -118,7 +140,14 @@ fun KategoriList(
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         items(kategori) { kategoriItem ->
-            KategoriCard(kategori = kategoriItem, modifier = Modifier.fillMaxWidth())
+            KategoriCard(
+                kategori = kategoriItem,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .clickable { onDetailClick(kategoriItem) }
+            ){
+                onDeleteClick(kategoriItem)
+            }
         }
     }
 }
@@ -126,7 +155,8 @@ fun KategoriList(
 @Composable
 fun KategoriCard(
     kategori: Kategori,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onDeleteClick: (Kategori) -> Unit = {}
 ) {
     Card(
         modifier = modifier,
@@ -137,12 +167,24 @@ fun KategoriCard(
             modifier = Modifier.padding(16.dp),
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
+            Row (
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically
+            ){
+                Text(
+                    text = kategori.namaKategori,
+                    style = MaterialTheme.typography.titleLarge,
+                )
+                Spacer(Modifier.weight(1f))
+                IconButton(onClick = {onDeleteClick(kategori)}) {
+                    Icon(
+                        imageVector = Icons.Default.Delete,
+                        contentDescription = null
+                    )
+                }
+            }
             Text(
                 text = kategori.idKategori,
-                style = MaterialTheme.typography.titleLarge
-            )
-            Text(
-                text = kategori.namaKategori,
                 style = MaterialTheme.typography.titleLarge
             )
             Text(
