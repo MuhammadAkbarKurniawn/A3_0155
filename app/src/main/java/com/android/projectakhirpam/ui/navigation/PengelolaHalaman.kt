@@ -11,8 +11,11 @@ import androidx.navigation.navArgument
 import com.android.projectakhirpam.ui.view.produk.DestinasiDetail
 import com.android.projectakhirpam.ui.view.produk.DestinasiEntry
 import com.android.projectakhirpam.ui.view.produk.DestinasiHome
+import com.android.projectakhirpam.ui.view.produk.DestinasiUpdate
+import com.android.projectakhirpam.ui.view.produk.DetailScreen
 import com.android.projectakhirpam.ui.view.produk.EntryProdukScreen
 import com.android.projectakhirpam.ui.view.produk.HomeScreen
+import com.android.projectakhirpam.ui.view.produk.UpdateScreen
 
 @Composable
 fun PengelolaHalaman(
@@ -43,6 +46,53 @@ fun PengelolaHalaman(
                     }
                 }
             )
+        }
+
+        composable (
+            DestinasiDetail.routeWithArg,
+            arguments = listOf(
+                navArgument(DestinasiDetail.IDPRODUK) {
+                    type = NavType.StringType
+                }
+            )
+        ){
+            val idproduk = it.arguments?.getString(DestinasiDetail.IDPRODUK)
+
+            idproduk?.let { idproduk ->
+                DetailScreen(
+                    navigateBack = {
+                        navController.navigate(DestinasiHome.route) {
+                            popUpTo(DestinasiHome.route) {
+                                inclusive = true
+                            }
+                        }
+                    },
+                    navigateToItemUpdate = {
+                        navController.navigate("${DestinasiUpdate.route}/$idproduk")
+                    }
+                )
+            }
+        }
+
+        composable(
+            DestinasiUpdate.routeWithArg,
+            arguments = listOf(
+                navArgument(DestinasiDetail.IDPRODUK){
+                    type = NavType.StringType
+                }
+            )
+        ){
+            val idproduk = it.arguments?.getString(DestinasiUpdate.IDPRODUK)
+            idproduk?.let { id ->
+                UpdateScreen(
+                    onBack = {
+                        navController.popBackStack()
+                    },
+                    onNavigate = {
+                        navController.popBackStack()
+                    }
+                )
+            }
         }
     }
 }
