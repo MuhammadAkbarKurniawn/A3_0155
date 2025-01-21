@@ -6,6 +6,7 @@ import androidx.lifecycle.viewmodel.CreationExtras
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.android.projectakhirpam.ProdukApplications
+import com.android.projectakhirpam.ui.viewmodel.kategori.KategoriViewModel
 import com.android.projectakhirpam.ui.viewmodel.produk.DetailViewModel
 import com.android.projectakhirpam.ui.viewmodel.produk.HomeViewModel
 import com.android.projectakhirpam.ui.viewmodel.produk.InsertViewModel
@@ -17,6 +18,8 @@ object penyediaViewModel {
         initializer { InsertViewModel(aplikasiProduk().container.produkRepository) }
         initializer { DetailViewModel(createSavedStateHandle(),aplikasiProduk().container.produkRepository) }
         initializer { UpdateViewModel(createSavedStateHandle(),aplikasiProduk().container.produkRepository) }
+
+        initializer { KategoriViewModel(aplikasiProduk().container.kategoriRepository) }
     }
 
     fun CreationExtras.aplikasiProduk(): ProdukApplications =
