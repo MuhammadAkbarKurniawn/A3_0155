@@ -79,7 +79,7 @@ fun HomeScreen(
                 shape = MaterialTheme.shapes.medium,
                 modifier = Modifier.padding(18.dp)
             ) {
-                Icon(imageVector = Icons.Default.Add, contentDescription = "Add Kontak")
+                Icon(imageVector = Icons.Default.Add, contentDescription = "Add Produk")
             }
         },
     ){innerPadding->
@@ -110,7 +110,7 @@ fun HomeStatus(
                     modifier = modifier.fillMaxSize(),
                     contentAlignment = Alignment.Center
                 ) {
-                    Text(text = "Tidak ada data Mahasiswa")
+                    Text(text = "Tidak ada data Produk")
                 }
             } else {
                 MhsLayout(

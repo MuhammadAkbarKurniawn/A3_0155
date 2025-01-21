@@ -19,22 +19,22 @@ interface produkService {
     )
 
     // @POST("insertproduk.php")
-    @POST("store")
+    @POST("produk/store")
     suspend fun insertProduk(@Body produk: Produk)
 
     // @GET("bacaproduk.php")
-    @GET(".")
+    @GET("produk")
     suspend fun getAllProduk(): AllProdukResponse
 
     // @GET("baca1produk.php")
-    @GET("{id}")
+    @GET("produk/{id}")
     suspend fun getProdukById(@Path("id") idProduk: String): ProdukDetailResponse
 
     // @PUT("editproduk.php")
-    @PUT("{id}")
+    @PUT("produk/{id}")
     suspend fun updateProduk(@Path("id") idProduk: String, @Body produk: Produk)
 
     // @DELETE("deleteproduk.php")
-    @DELETE("{id}")
+    @DELETE("produk/{id}")
     suspend fun deleteProduk(@Path("id") idProduk: String): Response<Void>
 }

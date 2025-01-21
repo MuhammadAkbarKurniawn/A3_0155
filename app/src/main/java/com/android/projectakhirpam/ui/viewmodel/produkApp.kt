@@ -20,7 +20,7 @@ fun ProdukApp(modifier: Modifier = Modifier){
 
         ) {
         Surface(
-            modifier = Modifier
+            modifier = modifier
                 .fillMaxSize()
                 .padding(it)
         ) {

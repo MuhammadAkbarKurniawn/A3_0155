@@ -26,29 +26,29 @@ class ApplicationsContainer : AppContainer {
         .baseUrl(baseUrl)
         .build()
 
-    private val produkService: produkService by lazy {
-        retrofit.create(produkService::class.java)
-    }
-    private val kategoriService: kategoriService by lazy {
+    private val prdkService: produkService by lazy {
+        retrofit.create(produkService::class.java) }
+
+    private val ktgrService: kategoriService by lazy {
         retrofit.create(kategoriService::class.java)
     }
-    private val pemasokService: pemasokService by lazy {
+    private val pmskService: pemasokService by lazy {
         retrofit.create(pemasokService::class.java)
     }
-    private val merkService: merkService by lazy {
+    private val mrkService: merkService by lazy {
         retrofit.create(merkService::class.java)
     }
 
     override val produkRepository: ProdukRepository by lazy {
-        NetworkProdukRepository(produkService)
+        NetworkProdukRepository(prdkService)
     }
     override val kategoriRepository: KategoriRepository by lazy {
-        NetworkKategoriRepository(kategoriService)
+        NetworkKategoriRepository(ktgrService)
     }
     override val pemasokRepository: PemasokRepository by lazy {
-        NetworkPemasokRepository(pemasokService)
+        NetworkPemasokRepository(pmskService)
     }
     override val merkRepository: MerkRepository by lazy {
-        NetworkMerkRepository(merkService)
+        NetworkMerkRepository(mrkService)
     }
 }
