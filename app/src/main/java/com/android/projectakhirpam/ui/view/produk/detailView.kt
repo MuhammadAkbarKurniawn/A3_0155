@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Edit
+import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -43,6 +44,7 @@ object DestinasiDetail : DestinasiNavigasi {
 fun DetailScreen(
     navigateBack: () -> Unit,
     navigateToItemUpdate: () -> Unit,
+    navigateToHomeKategori: () -> Unit,
     modifier: Modifier = Modifier,
     viewModel: DetailViewModel = viewModel(factory = penyediaViewModel.Factory)
 ) {
@@ -73,7 +75,8 @@ fun DetailScreen(
         DetailStatus(
             modifier = Modifier.padding(innerPadding),
             detailUiState = viewModel.mahasiswaDetailState,
-            retryAction = { viewModel.getDetailProduk() }
+            retryAction = { viewModel.getDetailProduk() },
+            navigateToHomeKategori = navigateToHomeKategori
         )
     }
 }
@@ -82,7 +85,8 @@ fun DetailScreen(
 fun DetailStatus(
     retryAction: () -> Unit,
     modifier: Modifier = Modifier,
-    detailUiState: DetailUiState
+    detailUiState: DetailUiState,
+    navigateToHomeKategori: () -> Unit
 ) {
     when (detailUiState) {
         is DetailUiState.Loading -> OnLoading(modifier = modifier.fillMaxSize())
@@ -98,7 +102,8 @@ fun DetailStatus(
             } else {
                 ItemDetailPrdk(
                     produk = detailUiState.produk,
-                    modifier = modifier.fillMaxWidth()
+                    modifier = modifier.fillMaxWidth(),
+                    navigateToHomeKategori = navigateToHomeKategori
                 )
             }
         }
@@ -110,7 +115,8 @@ fun DetailStatus(
 @Composable
 fun ItemDetailPrdk(
     produk: Produk,
-    modifier: Modifier
+    modifier: Modifier,
+    navigateToHomeKategori: () -> Unit
 ){
     Card (
         modifier = modifier.fillMaxWidth(),
@@ -135,6 +141,13 @@ fun ItemDetailPrdk(
             ComponentDetailProduk(judul = "id Pemasok", isinya = produk.idPemasok)
             Spacer(modifier = Modifier.padding(4.dp))
             ComponentDetailProduk(judul = "id Merk", isinya = produk.idMerk)
+        }
+        Spacer(modifier = Modifier.padding(16.dp))
+        Button(
+            onClick = navigateToHomeKategori,
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Text(text = "Kategori Terkait Produk")
         }
     }
 }
