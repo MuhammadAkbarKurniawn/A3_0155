@@ -11,6 +11,7 @@ import androidx.navigation.navArgument
 import com.android.projectakhirpam.ui.view.produk.DestinasiDetail
 import com.android.projectakhirpam.ui.view.produk.DestinasiEntry
 import com.android.projectakhirpam.ui.view.produk.DestinasiHome
+import com.android.projectakhirpam.ui.view.produk.EntryProdukScreen
 import com.android.projectakhirpam.ui.view.produk.HomeScreen
 
 @Composable
@@ -32,5 +33,16 @@ fun PengelolaHalaman(
             )
         }
 
+        composable(DestinasiEntry.route) {
+            EntryProdukScreen(
+                navigateBack = {
+                    navController.navigate(DestinasiHome.route){
+                        popUpTo(DestinasiHome.route){
+                            inclusive = true
+                        }
+                    }
+                }
+            )
+        }
     }
 }
