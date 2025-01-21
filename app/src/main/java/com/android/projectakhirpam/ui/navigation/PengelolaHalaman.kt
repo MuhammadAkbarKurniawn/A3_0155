@@ -8,6 +8,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.android.projectakhirpam.ui.view.produk.DestinasiDetail
+import com.android.projectakhirpam.ui.view.produk.DestinasiEntry
 import com.android.projectakhirpam.ui.view.produk.DestinasiHome
 import com.android.projectakhirpam.ui.view.produk.HomeScreen
 
@@ -18,10 +20,16 @@ fun PengelolaHalaman(
     NavHost(
         navController = navController,
         startDestination = DestinasiHome.route,
-        modifier = Modifier,
+        modifier = modifier,
     ){
         composable(DestinasiHome.route){
-            HomeScreen()
+            HomeScreen(
+                navigateToItemEntry = { navController.navigate(DestinasiEntry.route) },
+                onDetailClick = {idproduk ->
+                    navController.navigate("${DestinasiDetail.route}/$idproduk")
+                    println("PengelolaHalaman: idproduk = $idproduk")
+                }
+            )
         }
 
     }
