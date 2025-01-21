@@ -16,18 +16,18 @@ interface pemasokService {
         "Content-Type: application/json"
     )
 
-    @POST("store")
+    @POST("pemasok/store")
     suspend fun insertPemasok(@Body pemasok: Pemasok)
 
-    @GET(".")
+    @GET("pemasok")
     suspend fun getAllPemasok(): AllPemasokResponse
 
-    @GET("{id}")
+    @GET("pemasok/{id}")
     suspend fun getPemasokById(@Path("id") idPemasok: String): PemasokDetailResponse
 
-    @PUT("{id}")
+    @PUT("pemasok/{id}")
     suspend fun updatePemasok(@Path("id") idPemasok: String, @Body pemasok: Pemasok)
 
-    @DELETE("{id}")
+    @DELETE("pemasok/{id}")
     suspend fun deletePemasok(@Path("id") idPemasok: String): Response<Void>
 }

@@ -16,18 +16,18 @@ interface kategoriService {
         "Content-Type: application/json"
     )
 
-    @POST("store")
+    @POST("kategori/store")
     suspend fun insertKategori(@Body kategori: Kategori)
 
-    @GET(".")
+    @GET("kategori")
     suspend fun getAllKategori(): AllKategoriResponse
 
-    @GET("{id}")
+    @GET("kategori/{id}")
     suspend fun getKategoriById(@Path("id") idKategori: String): KategoriDetailResponse
 
-    @PUT("{id}")
+    @PUT("kategori/{id}")
     suspend fun updateKategori(@Path("id") idKategori: String, @Body kategori: Kategori)
 
-    @DELETE("{id}")
+    @DELETE("kategori/{id}")
     suspend fun deleteKategori(@Path("id") idKategori: String): Response<Void>
 }

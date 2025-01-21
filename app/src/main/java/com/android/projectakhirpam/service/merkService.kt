@@ -18,18 +18,18 @@ interface merkService {
         "Content-Type: application/json"
     )
 
-    @POST("store")
+    @POST("merk/store")
     suspend fun insertMerk(@Body merk: Merk)
 
-    @GET(".")
+    @GET("merk")
     suspend fun getAllMerk(): AllMerkResponse
 
-    @GET("{id}")
+    @GET("merk/{id}")
     suspend fun getMerkById(@Path("id") idMerk: String): MerkDetailResponse
 
-    @PUT("{id}")
+    @PUT("merk/{id}")
     suspend fun updateMerk(@Path("id") idMerk: String, @Body merk: Merk)
 
-    @DELETE("{id}")
+    @DELETE("merk/{id}")
     suspend fun deleteMerk(@Path("id") idMerk: String): Response<Void>
 }
