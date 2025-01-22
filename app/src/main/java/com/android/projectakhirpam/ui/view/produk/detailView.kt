@@ -1,5 +1,6 @@
 package com.android.projectakhirpam.ui.view.produk
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -49,6 +50,7 @@ fun DetailScreen(
     viewModel: DetailViewModel = viewModel(factory = penyediaViewModel.Factory)
 ) {
     Scaffold(
+        modifier = modifier,
         topBar = {
             CostumeTopAppBar(
                 title = DestinasiDetail.titleRes,
@@ -117,32 +119,38 @@ fun ItemDetailPrdk(
     produk: Produk,
     modifier: Modifier,
     navigateToHomeKategori: () -> Unit
-){
-    Card (
-        modifier = modifier.fillMaxWidth(),
-        colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.primaryContainer,
-            contentColor = MaterialTheme.colorScheme.onPrimaryContainer
-        )
-    ){
-        Column(modifier = Modifier.padding(16.dp)) {
-            ComponentDetailProduk(judul = "Nama Produk", isinya = produk.namaProduk)
-            Spacer(modifier = Modifier.padding(4.dp))
-            ComponentDetailProduk(judul = "id Produk", isinya = produk.idProduk)
-            Spacer(modifier = Modifier.padding(4.dp))
-            ComponentDetailProduk(judul = "deskripsi", isinya = produk.deskripsiProduk)
-            Spacer(modifier = Modifier.padding(4.dp))
-            ComponentDetailProduk(judul = "Stok", isinya = produk.stok)
-            Spacer(modifier = Modifier.padding(4.dp))
-            ComponentDetailProduk(judul = "Harga", isinya = produk.harga)
-            Spacer(modifier = Modifier.padding(4.dp))
-            ComponentDetailProduk(judul = "id Kategori", isinya = produk.idKategori)
-            Spacer(modifier = Modifier.padding(4.dp))
-            ComponentDetailProduk(judul = "id Pemasok", isinya = produk.idPemasok)
-            Spacer(modifier = Modifier.padding(4.dp))
-            ComponentDetailProduk(judul = "id Merk", isinya = produk.idMerk)
+) {
+    Column(
+        modifier = modifier
+            .fillMaxSize()
+            .padding(15.dp),
+        verticalArrangement = Arrangement.spacedBy(16.dp)
+    ) {
+        Card(
+            modifier = modifier.fillMaxWidth(),
+            colors = CardDefaults.cardColors(
+                containerColor = MaterialTheme.colorScheme.primaryContainer,
+                contentColor = MaterialTheme.colorScheme.onPrimaryContainer
+            )
+        ) {
+            Column(modifier = Modifier.padding(16.dp)) {
+                ComponentDetailProduk(judul = "Nama Produk", isinya = produk.namaProduk)
+                Spacer(modifier = Modifier.padding(4.dp))
+                ComponentDetailProduk(judul = "id Produk", isinya = produk.idProduk)
+                Spacer(modifier = Modifier.padding(4.dp))
+                ComponentDetailProduk(judul = "deskripsi", isinya = produk.deskripsiProduk)
+                Spacer(modifier = Modifier.padding(4.dp))
+                ComponentDetailProduk(judul = "Stok", isinya = produk.stok)
+                Spacer(modifier = Modifier.padding(4.dp))
+                ComponentDetailProduk(judul = "Harga", isinya = produk.harga)
+                Spacer(modifier = Modifier.padding(4.dp))
+                ComponentDetailProduk(judul = "id Kategori", isinya = produk.idKategori)
+                Spacer(modifier = Modifier.padding(4.dp))
+                ComponentDetailProduk(judul = "id Pemasok", isinya = produk.idPemasok)
+                Spacer(modifier = Modifier.padding(4.dp))
+                ComponentDetailProduk(judul = "id Merk", isinya = produk.idMerk)
+            }
         }
-        Spacer(modifier = Modifier.padding(16.dp))
         Button(
             onClick = navigateToHomeKategori,
             modifier = Modifier.fillMaxWidth()
@@ -151,7 +159,6 @@ fun ItemDetailPrdk(
         }
     }
 }
-
 @Composable
 fun ComponentDetailProduk(
     modifier: Modifier = Modifier,
