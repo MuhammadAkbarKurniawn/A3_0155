@@ -50,6 +50,7 @@ fun DetailKategoriScreen(
     viewModel: DetailKategoriViewModel = viewModel(factory = penyediaViewModel.Factory)
 ) {
     Scaffold(
+        modifier = modifier,
         topBar = {
             CostumeTopAppBar(
                 title = DestinasiDetailKategori.titleRes,

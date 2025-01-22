@@ -11,9 +11,11 @@ import androidx.navigation.navArgument
 import com.android.projectakhirpam.ui.view.kategori.DestinasiDetailKategori
 import com.android.projectakhirpam.ui.view.kategori.DestinasiEntryKategori
 import com.android.projectakhirpam.ui.view.kategori.DestinasiHomeKategori
+import com.android.projectakhirpam.ui.view.kategori.DestinasiUpdateKategori
 import com.android.projectakhirpam.ui.view.kategori.DetailKategoriScreen
 import com.android.projectakhirpam.ui.view.kategori.EntryKategoriScreen
 import com.android.projectakhirpam.ui.view.kategori.HomeKategoriScreen
+import com.android.projectakhirpam.ui.view.kategori.UpdateKategoriScreen
 import com.android.projectakhirpam.ui.view.produk.DestinasiDetail
 import com.android.projectakhirpam.ui.view.produk.DestinasiEntry
 import com.android.projectakhirpam.ui.view.produk.DestinasiHome
@@ -157,7 +159,29 @@ fun PengelolaHalaman(
                         }
                     },
                     navigateToItemUpdate = {
-                        navController.navigate("${DestinasiUpdate.route}/$idkategori")
+                        navController.navigate("${DestinasiUpdateKategori.route}/$idkategori")
+                    }
+                )
+            }
+        }
+
+        // Update kategori
+        composable(
+            DestinasiUpdateKategori.routeWithArg,
+            arguments = listOf(
+                navArgument(DestinasiDetailKategori.IDKTGR){
+                    type = NavType.StringType
+                }
+            )
+        ){
+            val idkategori = it.arguments?.getString(DestinasiUpdateKategori.IDKTGR)
+            idkategori?.let { id ->
+                UpdateKategoriScreen(
+                    onBack = {
+                        navController.popBackStack()
+                    },
+                    onNavigate = {
+                        navController.popBackStack()
                     }
                 )
             }
