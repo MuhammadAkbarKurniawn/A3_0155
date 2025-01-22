@@ -8,8 +8,10 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.android.projectakhirpam.ui.view.kategori.DestinasiDetailKategori
 import com.android.projectakhirpam.ui.view.kategori.DestinasiEntryKategori
 import com.android.projectakhirpam.ui.view.kategori.DestinasiHomeKategori
+import com.android.projectakhirpam.ui.view.kategori.DetailKategoriScreen
 import com.android.projectakhirpam.ui.view.kategori.EntryKategoriScreen
 import com.android.projectakhirpam.ui.view.kategori.HomeKategoriScreen
 import com.android.projectakhirpam.ui.view.produk.DestinasiDetail
@@ -30,6 +32,7 @@ fun PengelolaHalaman(
         startDestination = DestinasiHome.route,
         modifier = modifier,
     ){
+        // Home produk
         composable(DestinasiHome.route){
             HomeScreen(
                 navigateToItemEntry = { navController.navigate(DestinasiEntry.route) },
@@ -40,6 +43,7 @@ fun PengelolaHalaman(
             )
         }
 
+        // Insert produk
         composable(DestinasiEntry.route) {
             EntryProdukScreen(
                 navigateBack = {
@@ -52,6 +56,7 @@ fun PengelolaHalaman(
             )
         }
 
+        //Detail Produk
         composable (
             DestinasiDetail.routeWithArg,
             arguments = listOf(
@@ -81,6 +86,7 @@ fun PengelolaHalaman(
             }
         }
 
+        // Update Produk
         composable(
             DestinasiUpdate.routeWithArg,
             arguments = listOf(
@@ -103,14 +109,21 @@ fun PengelolaHalaman(
         }
 
 
+        // Home Kategori
         composable(DestinasiHomeKategori.route) {
             HomeKategoriScreen(
                 navigateBack = { navController.popBackStack() },
+                onDetailClick = {idkategori ->
+                    navController.navigate("${DestinasiDetailKategori.route}/$idkategori")
+                    println("PengelolaHalaman: idkategori = $idkategori")
+                },
                 navigateToKategoriEntry = {
                     navController.navigate(DestinasiEntryKategori.route)
                 }
             )
         }
+
+        // Insert Kaategori
         composable(DestinasiEntryKategori.route) {
             EntryKategoriScreen(
                 navigateBack = {
@@ -123,5 +136,31 @@ fun PengelolaHalaman(
             )
         }
 
+        // Detail Kategori
+        composable (
+            DestinasiDetailKategori.routeWithArg,
+            arguments = listOf(
+                navArgument(DestinasiDetailKategori.IDKTGR) {
+                    type = NavType.StringType
+                }
+            )
+        ){
+            val idkategori = it.arguments?.getString(DestinasiDetailKategori.IDKTGR)
+
+            idkategori?.let { idkategori ->
+                DetailKategoriScreen(
+                    navigateBack = {
+                        navController.navigate(DestinasiHomeKategori.route) {
+                            popUpTo(DestinasiHomeKategori.route) {
+                                inclusive = true
+                            }
+                        }
+                    },
+                    navigateToItemUpdate = {
+                        navController.navigate("${DestinasiUpdate.route}/$idkategori")
+                    }
+                )
+            }
+        }
     }
 }
