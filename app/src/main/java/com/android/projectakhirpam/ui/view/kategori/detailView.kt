@@ -129,18 +129,18 @@ fun ItemDetailKtgr(
             )
         ){
             Column(modifier = Modifier.padding(16.dp)) {
-                ComponentDetailProduk(judul = "Nama kategori", isinya = kategori.namaKategori)
+                ComponentDetailKategori(judul = "Nama kategori", isinya = kategori.namaKategori)
                 Spacer(modifier = Modifier.padding(4.dp))
-                ComponentDetailProduk(judul = "id Kategori", isinya = kategori.idKategori)
+                ComponentDetailKategori(judul = "id Kategori", isinya = kategori.idKategori)
                 Spacer(modifier = Modifier.padding(4.dp))
-                ComponentDetailProduk(judul = "Deskripsi", isinya = kategori.deskripsiKategori)
+                ComponentDetailKategori(judul = "Deskripsi", isinya = kategori.deskripsiKategori)
             }
         }
     }
 }
 
 @Composable
-fun ComponentDetailProduk(
+fun ComponentDetailKategori(
     modifier: Modifier = Modifier,
     judul: String,
     isinya: String,
