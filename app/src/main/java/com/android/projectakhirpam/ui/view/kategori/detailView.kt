@@ -117,7 +117,7 @@ fun ItemDetailKtgr(
     modifier: Modifier,
 ){
     Column(
-    modifier = modifier
+    modifier = Modifier
         .fillMaxSize()
         .padding(15.dp),
     verticalArrangement = Arrangement.spacedBy(16.dp)){

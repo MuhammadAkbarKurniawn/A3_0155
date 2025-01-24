@@ -121,10 +121,8 @@ fun ItemDetailPrdk(
     navigateToHomeKategori: () -> Unit
 ) {
     Column(
-        modifier = modifier
-            .fillMaxSize()
+        modifier = Modifier
             .padding(15.dp),
-        verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         Card(
             modifier = modifier.fillMaxWidth(),
@@ -156,6 +154,13 @@ fun ItemDetailPrdk(
             modifier = Modifier.fillMaxWidth()
         ) {
             Text(text = "Kategori Terkait Produk")
+        }
+        Spacer(modifier = Modifier.padding(8.dp))
+        Button(
+            onClick = navigateToHomeKategori,
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Text(text = "Detail Lebih Lanjut")
         }
     }
 }
