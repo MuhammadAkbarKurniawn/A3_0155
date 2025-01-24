@@ -60,7 +60,7 @@ fun EntryKategoriScreen(
             )
         }
     ){innerPadding ->
-        EntryBody(
+        EntryBodyKtgr(
             insertUiStateKtgr = viewModel.uiStateKtgr,
             onkategoriValueChange = viewModel ::updateInsertKtgrState,
             onSaveClick = {
@@ -79,7 +79,7 @@ fun EntryKategoriScreen(
 }
 
 @Composable
-fun EntryBody(
+fun EntryBodyKtgr(
     insertUiStateKtgr: InsertUiStateKtgr,
     onkategoriValueChange:(KtgrInsertUiEvent) -> Unit,
     onSaveClick: () -> Unit,

@@ -50,7 +50,7 @@ fun UpdateKategoriScreen(
             )
         }
     ){ padding ->
-        EntryBody(
+        EntryBodyKtgr(
             modifier = Modifier.padding(padding),
             onkategoriValueChange =  viewModel::updateInsertKtgrState,
             insertUiStateKtgr = viewModel.uiStateKtgr,
