@@ -94,6 +94,9 @@ fun PengelolaHalaman(
                     },
                     navigateToHomePemasok = {
                         navController.navigate(DestinasiHomePemasok.route)
+                    },
+                    navigateToHomeMerk = {
+                        navController.navigate(DestinasiHomePemasok.route)
                     }
                 )
             }

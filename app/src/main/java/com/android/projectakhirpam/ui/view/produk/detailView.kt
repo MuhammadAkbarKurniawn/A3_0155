@@ -47,6 +47,7 @@ fun DetailScreen(
     navigateToItemUpdate: () -> Unit,
     navigateToHomeKategori: () -> Unit,
     navigateToHomePemasok: () -> Unit,
+    navigateToHomeMerk: () -> Unit,
     modifier: Modifier = Modifier,
     viewModel: DetailViewModel = viewModel(factory = penyediaViewModel.Factory)
 ) {
@@ -80,7 +81,8 @@ fun DetailScreen(
             detailUiState = viewModel.mahasiswaDetailState,
             retryAction = { viewModel.getDetailProduk() },
             navigateToHomeKategori = navigateToHomeKategori,
-            navigateToHomePemasok = navigateToHomePemasok
+            navigateToHomePemasok = navigateToHomePemasok,
+            navigateToHomeMerk = navigateToHomeMerk
         )
     }
 }
@@ -91,7 +93,8 @@ fun DetailStatus(
     modifier: Modifier = Modifier,
     detailUiState: DetailUiState,
     navigateToHomeKategori: () -> Unit,
-    navigateToHomePemasok: () -> Unit
+    navigateToHomePemasok: () -> Unit,
+    navigateToHomeMerk: () -> Unit
 ) {
     when (detailUiState) {
         is DetailUiState.Loading -> OnLoading(modifier = modifier.fillMaxSize())
@@ -109,7 +112,8 @@ fun DetailStatus(
                     produk = detailUiState.produk,
                     modifier = modifier.fillMaxWidth(),
                     navigateToHomeKategori = navigateToHomeKategori,
-                    navigateToHomePemasok = navigateToHomePemasok
+                    navigateToHomePemasok = navigateToHomePemasok,
+                    navigateToHomeMerk = navigateToHomeMerk
                 )
             }
         }
@@ -123,7 +127,8 @@ fun ItemDetailPrdk(
     produk: Produk,
     modifier: Modifier,
     navigateToHomeKategori: () -> Unit,
-    navigateToHomePemasok: () -> Unit
+    navigateToHomePemasok: () -> Unit,
+    navigateToHomeMerk: () -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -169,7 +174,7 @@ fun ItemDetailPrdk(
         }
         Spacer(modifier = Modifier.padding(8.dp))
         Button(
-            onClick = navigateToHomePemasok,
+            onClick = navigateToHomeMerk,
             modifier = Modifier.fillMaxWidth()
         ) {
             Text(text = "Merk")
