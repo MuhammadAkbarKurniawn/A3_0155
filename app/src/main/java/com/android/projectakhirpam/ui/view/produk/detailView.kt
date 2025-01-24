@@ -46,6 +46,7 @@ fun DetailScreen(
     navigateBack: () -> Unit,
     navigateToItemUpdate: () -> Unit,
     navigateToHomeKategori: () -> Unit,
+    navigateToHomePemasok: () -> Unit,
     modifier: Modifier = Modifier,
     viewModel: DetailViewModel = viewModel(factory = penyediaViewModel.Factory)
 ) {
@@ -78,7 +79,8 @@ fun DetailScreen(
             modifier = Modifier.padding(innerPadding),
             detailUiState = viewModel.mahasiswaDetailState,
             retryAction = { viewModel.getDetailProduk() },
-            navigateToHomeKategori = navigateToHomeKategori
+            navigateToHomeKategori = navigateToHomeKategori,
+            navigateToHomePemasok = navigateToHomePemasok
         )
     }
 }
@@ -88,7 +90,8 @@ fun DetailStatus(
     retryAction: () -> Unit,
     modifier: Modifier = Modifier,
     detailUiState: DetailUiState,
-    navigateToHomeKategori: () -> Unit
+    navigateToHomeKategori: () -> Unit,
+    navigateToHomePemasok: () -> Unit
 ) {
     when (detailUiState) {
         is DetailUiState.Loading -> OnLoading(modifier = modifier.fillMaxSize())
@@ -105,7 +108,8 @@ fun DetailStatus(
                 ItemDetailPrdk(
                     produk = detailUiState.produk,
                     modifier = modifier.fillMaxWidth(),
-                    navigateToHomeKategori = navigateToHomeKategori
+                    navigateToHomeKategori = navigateToHomeKategori,
+                    navigateToHomePemasok = navigateToHomePemasok
                 )
             }
         }
@@ -118,7 +122,8 @@ fun DetailStatus(
 fun ItemDetailPrdk(
     produk: Produk,
     modifier: Modifier,
-    navigateToHomeKategori: () -> Unit
+    navigateToHomeKategori: () -> Unit,
+    navigateToHomePemasok: () -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -153,14 +158,21 @@ fun ItemDetailPrdk(
             onClick = navigateToHomeKategori,
             modifier = Modifier.fillMaxWidth()
         ) {
-            Text(text = "Kategori Terkait Produk")
+            Text(text = "Kategori terkait Produk")
         }
         Spacer(modifier = Modifier.padding(8.dp))
         Button(
-            onClick = navigateToHomeKategori,
+            onClick = navigateToHomePemasok,
             modifier = Modifier.fillMaxWidth()
         ) {
-            Text(text = "Detail Lebih Lanjut")
+            Text(text = "Pemasok")
+        }
+        Spacer(modifier = Modifier.padding(8.dp))
+        Button(
+            onClick = navigateToHomePemasok,
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Text(text = "Merk")
         }
     }
 }
