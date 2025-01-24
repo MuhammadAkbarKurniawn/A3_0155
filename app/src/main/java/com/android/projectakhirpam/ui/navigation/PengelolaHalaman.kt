@@ -16,6 +16,14 @@ import com.android.projectakhirpam.ui.view.kategori.DetailKategoriScreen
 import com.android.projectakhirpam.ui.view.kategori.EntryKategoriScreen
 import com.android.projectakhirpam.ui.view.kategori.HomeKategoriScreen
 import com.android.projectakhirpam.ui.view.kategori.UpdateKategoriScreen
+import com.android.projectakhirpam.ui.view.pemasok.DestinasiDetailPemasok
+import com.android.projectakhirpam.ui.view.pemasok.DestinasiEntryPemasok
+import com.android.projectakhirpam.ui.view.pemasok.DestinasiHomePemasok
+import com.android.projectakhirpam.ui.view.pemasok.DestinasiUpdatePemasok
+import com.android.projectakhirpam.ui.view.pemasok.DetailPemasokScreen
+import com.android.projectakhirpam.ui.view.pemasok.EntryPemasokScreen
+import com.android.projectakhirpam.ui.view.pemasok.HomePemasokScreen
+import com.android.projectakhirpam.ui.view.pemasok.UpdatePemasokScreen
 import com.android.projectakhirpam.ui.view.produk.DestinasiDetail
 import com.android.projectakhirpam.ui.view.produk.DestinasiEntry
 import com.android.projectakhirpam.ui.view.produk.DestinasiHome
@@ -83,6 +91,9 @@ fun PengelolaHalaman(
                     },
                     navigateToHomeKategori = {
                         navController.navigate(DestinasiHomeKategori.route)
+                    },
+                    navigateToHomePemasok = {
+                        navController.navigate(DestinasiHomePemasok.route)
                     }
                 )
             }
@@ -186,5 +197,82 @@ fun PengelolaHalaman(
                 )
             }
         }
+
+        // Home Pemasok
+        composable(DestinasiHomePemasok.route) {
+            HomePemasokScreen(
+                navigateBack = { navController.popBackStack() },
+                onDetailClick = {idpemasok ->
+                    navController.navigate("${DestinasiDetailPemasok.route}/$idpemasok")
+                    println("PengelolaHalaman: idpemasok = $idpemasok")
+                },
+                navigateToKategoriEntry = {
+                    navController.navigate(DestinasiEntryPemasok.route)
+                }
+            )
+        }
+
+        // Insert Pemasok
+        composable(DestinasiEntryPemasok.route) {
+            EntryPemasokScreen(
+                navigateBack = {
+                    navController.navigate(DestinasiHomePemasok.route){
+                        popUpTo(DestinasiHomePemasok.route){
+                            inclusive = true
+                        }
+                    }
+                }
+            )
+        }
+
+        // Detail Pemasok
+        composable (
+            DestinasiDetailPemasok.routeWithArg,
+            arguments = listOf(
+                navArgument(DestinasiDetailPemasok.IDPMSK) {
+                    type = NavType.StringType
+                }
+            )
+        ){
+            val idpemasok = it.arguments?.getString(DestinasiDetailPemasok.IDPMSK)
+
+            idpemasok?.let { idpemasok ->
+                DetailPemasokScreen(
+                    navigateBack = {
+                        navController.navigate(DestinasiHomePemasok.route) {
+                            popUpTo(DestinasiHomePemasok.route) {
+                                inclusive = true
+                            }
+                        }
+                    },
+                    navigateToItemUpdate = {
+                        navController.navigate("${DestinasiUpdatePemasok.route}/$idpemasok")
+                    }
+                )
+            }
+        }
+
+        // Update Pemasok
+        composable(
+            DestinasiUpdatePemasok.routeWithArg,
+            arguments = listOf(
+                navArgument(DestinasiDetailPemasok.IDPMSK){
+                    type = NavType.StringType
+                }
+            )
+        ){
+            val idpemasok = it.arguments?.getString(DestinasiUpdatePemasok.IDPMSK)
+            idpemasok?.let { id ->
+                UpdatePemasokScreen(
+                    onBack = {
+                        navController.popBackStack()
+                    },
+                    onNavigate = {
+                        navController.popBackStack()
+                    }
+                )
+            }
+        }
+
     }
 }
