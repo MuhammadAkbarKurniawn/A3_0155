@@ -58,6 +58,12 @@ fun EntryProdukScreen(
     val coroutineScope = rememberCoroutineScope()
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
 
+    remember {
+        coroutineScope.launch {
+            viewModel.LoadData()
+        }
+    }
+
     val kategoriList = viewModel.kategoriList
     val pemasokList = viewModel.pemasokList
     val merkList = viewModel.merkList

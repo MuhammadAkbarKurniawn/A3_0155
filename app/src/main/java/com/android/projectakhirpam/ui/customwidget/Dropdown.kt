@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExposedDropdownMenuBox
+import androidx.compose.material3.ExposedDropdownMenuDefaults
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -13,7 +14,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.zIndex
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DropdownSelector(
@@ -25,11 +25,6 @@ fun DropdownSelector(
 ) {
     var expanded by remember { mutableStateOf(false) } // State untuk mengatur apakah dropdown terbuka
     var selectedText by remember { mutableStateOf(selectedItem) } // State untuk teks terpilih
-
-    // Mengupdate selectedText setiap kali selectedItem berubah
-    if (selectedText != selectedItem) {
-        selectedText = selectedItem
-    }
 
     ExposedDropdownMenuBox(
         expanded = expanded,
@@ -44,6 +39,7 @@ fun DropdownSelector(
                 .fillMaxWidth(),
             enabled = enabled,
             readOnly = true, // Agar text tidak dapat diedit langsung
+            trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded) },
             singleLine = true
         )
         ExposedDropdownMenu(

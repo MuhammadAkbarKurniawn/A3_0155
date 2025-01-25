@@ -20,17 +20,23 @@ class InsertViewModel(
     private val ktgr: KategoriRepository,
     private val pmsk: PemasokRepository,
     private val merk: MerkRepository
+
     ) : ViewModel() {
 
     var uiState by mutableStateOf(InsertUiState())
         private set
 
-    var kategoriList by mutableStateOf<List<Kategori>>(emptyList())
+    var kategoriList by mutableStateOf<List<Kategori>>(listOf())
         private set
-    var pemasokList by mutableStateOf<List<Pemasok>>(emptyList())
+    var pemasokList by mutableStateOf<List<Pemasok>>(listOf())
         private set
-    var merkList by mutableStateOf<List<Merk>>(emptyList())
+    var merkList by mutableStateOf<List<Merk>>(listOf())
         private set
+
+
+    init {
+        LoadData()  // Load data
+    }
 
     fun updateInsertPrdkState(insertUiEvent: InsertUiEvent) {
         uiState = InsertUiState(insertUiEvent = insertUiEvent)
@@ -45,6 +51,7 @@ class InsertViewModel(
             }
         }
     }
+
     fun LoadData(){
         viewModelScope.launch {
             try {
@@ -55,16 +62,7 @@ class InsertViewModel(
                 val merkResponse = merk.getAllMerk()
                 merkList = merkResponse.data
             }catch (e: Exception){
-            }
-        }
-    }
-
-    fun PostData(){
-        viewModelScope.launch {
-            try {
-                prdk.insertProduk(uiState.insertUiEvent.toPrdk())
-            }catch (e: Exception){
-
+                e.printStackTrace()
             }
         }
     }

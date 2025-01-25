@@ -26,13 +26,13 @@ class UpdateViewModel (
     var updateUiState by mutableStateOf(InsertUiState())
         private set
 
-    var kategoriList by mutableStateOf<List<Kategori>>(emptyList())
+    var kategoriList by mutableStateOf<List<Kategori>>(listOf())
         private set
 
-    var pemasokList by mutableStateOf<List<Pemasok>>(emptyList())
+    var pemasokList by mutableStateOf<List<Pemasok>>(listOf())
         private set
 
-    var merkList by mutableStateOf<List<Merk>>(emptyList())
+    var merkList by mutableStateOf<List<Merk>>(listOf())
         private set
 
     private val _idproduk: String = checkNotNull(savedStateHandle[DestinasiUpdate.IDPRODUK])
