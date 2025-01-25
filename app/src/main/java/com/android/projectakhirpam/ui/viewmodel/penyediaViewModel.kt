@@ -26,9 +26,17 @@ import com.android.projectakhirpam.ui.viewmodel.produk.UpdateViewModel
 object penyediaViewModel {
     val Factory = viewModelFactory {
         initializer { HomeViewModel(aplikasiProduk().container.produkRepository) }
-        initializer { InsertViewModel(aplikasiProduk().container.produkRepository) }
+        initializer { InsertViewModel(
+            aplikasiProduk().container.produkRepository,
+            aplikasiProduk().container.kategoriRepository,
+            aplikasiProduk().container.pemasokRepository,
+            aplikasiProduk().container.merkRepository) }
         initializer { DetailViewModel(createSavedStateHandle(),aplikasiProduk().container.produkRepository) }
-        initializer { UpdateViewModel(createSavedStateHandle(),aplikasiProduk().container.produkRepository) }
+        initializer { UpdateViewModel(createSavedStateHandle(),
+            aplikasiProduk().container.produkRepository,
+            aplikasiProduk().container.kategoriRepository,
+            aplikasiProduk().container.pemasokRepository,
+            aplikasiProduk().container.merkRepository) }
 
         initializer { KategoriViewModel(aplikasiProduk().container.kategoriRepository) }
         initializer { KategoriInsertViewModel(aplikasiProduk().container.kategoriRepository) }

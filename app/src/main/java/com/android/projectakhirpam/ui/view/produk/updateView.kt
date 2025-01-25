@@ -11,6 +11,7 @@ import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.android.projectakhirpam.ui.customwidget.CostumeTopAppBar
 import com.android.projectakhirpam.ui.navigation.DestinasiNavigasi
+import com.android.projectakhirpam.ui.view.kategori.KategoriList
 import com.android.projectakhirpam.ui.viewmodel.penyediaViewModel
 import com.android.projectakhirpam.ui.viewmodel.produk.UpdateViewModel
 import kotlinx.coroutines.Dispatchers
@@ -36,6 +37,11 @@ fun UpdateScreen(
     val coroutineScope = rememberCoroutineScope()
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
 
+    val uiState = viewModel.updateUiState
+    val kategoriList = viewModel.kategoriList
+    val pemasokList = viewModel.pemasokList
+    val merkList = viewModel.merkList
+
     Scaffold (
         modifier = modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
@@ -51,9 +57,12 @@ fun UpdateScreen(
             modifier = Modifier.padding(padding),
             onProdukValueChange = viewModel::updateInsertMhsState,
             insertUiState = viewModel.updateUiState,
+            kategoriList = kategoriList,
+            pemasokList = pemasokList,
+            merkList = merkList,
             onSaveClick = {
                 coroutineScope.launch {
-                    viewModel.updateMhs()
+                    viewModel.updatePrdk()
                     delay(600)
                     withContext(Dispatchers.Main){
                         onNavigate()
