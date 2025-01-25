@@ -16,6 +16,14 @@ import com.android.projectakhirpam.ui.view.kategori.DetailKategoriScreen
 import com.android.projectakhirpam.ui.view.kategori.EntryKategoriScreen
 import com.android.projectakhirpam.ui.view.kategori.HomeKategoriScreen
 import com.android.projectakhirpam.ui.view.kategori.UpdateKategoriScreen
+import com.android.projectakhirpam.ui.view.merk.DestinasiDetailMerk
+import com.android.projectakhirpam.ui.view.merk.DestinasiEntryMerk
+import com.android.projectakhirpam.ui.view.merk.DestinasiHomeMerk
+import com.android.projectakhirpam.ui.view.merk.DestinasiUpdateMerk
+import com.android.projectakhirpam.ui.view.merk.DetailMerkScreen
+import com.android.projectakhirpam.ui.view.merk.EntryMerkScreen
+import com.android.projectakhirpam.ui.view.merk.HomeMerkScreen
+import com.android.projectakhirpam.ui.view.merk.UpdateMerkScreen
 import com.android.projectakhirpam.ui.view.pemasok.DestinasiDetailPemasok
 import com.android.projectakhirpam.ui.view.pemasok.DestinasiEntryPemasok
 import com.android.projectakhirpam.ui.view.pemasok.DestinasiHomePemasok
@@ -96,7 +104,7 @@ fun PengelolaHalaman(
                         navController.navigate(DestinasiHomePemasok.route)
                     },
                     navigateToHomeMerk = {
-                        navController.navigate(DestinasiHomePemasok.route)
+                        navController.navigate(DestinasiHomeMerk.route)
                     }
                 )
             }
@@ -277,5 +285,81 @@ fun PengelolaHalaman(
             }
         }
 
+
+        // Home Merk
+        composable(DestinasiHomeMerk.route) {
+            HomeMerkScreen(
+                navigateBack = { navController.popBackStack() },
+                onDetailClick = {idmerk ->
+                    navController.navigate("${DestinasiDetailMerk.route}/$idmerk")
+                    println("PengelolaHalaman: idmerk = $idmerk")
+                },
+                navigateToKategoriEntry = {
+                    navController.navigate(DestinasiEntryMerk.route)
+                }
+            )
+        }
+
+        // Insert Merk
+        composable(DestinasiEntryMerk.route) {
+            EntryMerkScreen(
+                navigateBack = {
+                    navController.navigate(DestinasiHomeMerk.route){
+                        popUpTo(DestinasiHomeMerk.route){
+                            inclusive = true
+                        }
+                    }
+                }
+            )
+        }
+
+        // Detail Merk
+        composable (
+            DestinasiDetailMerk.routeWithArg,
+            arguments = listOf(
+                navArgument(DestinasiDetailMerk.IDMERK) {
+                    type = NavType.StringType
+                }
+            )
+        ){
+            val idmerk = it.arguments?.getString(DestinasiDetailMerk.IDMERK)
+
+            idmerk?.let { idmerk ->
+                DetailMerkScreen(
+                    navigateBack = {
+                        navController.navigate(DestinasiHomeMerk.route) {
+                            popUpTo(DestinasiHomeMerk.route) {
+                                inclusive = true
+                            }
+                        }
+                    },
+                    navigateToItemUpdate = {
+                        navController.navigate("${DestinasiUpdateMerk.route}/$idmerk")
+                    }
+                )
+            }
+        }
+
+        // Update MErk
+        composable(
+            DestinasiUpdateMerk.routeWithArg,
+            arguments = listOf(
+                navArgument(DestinasiDetailMerk.IDMERK){
+                    type = NavType.StringType
+                }
+            )
+        ){
+            val idmerk = it.arguments?.getString(DestinasiUpdateMerk.IDMERK)
+            idmerk?.let { id ->
+                UpdateMerkScreen(
+                    onBack = {
+                        navController.popBackStack()
+                    },
+                    onNavigate = {
+                        navController.popBackStack()
+                    }
+                )
+            }
+        }
     }
 }
