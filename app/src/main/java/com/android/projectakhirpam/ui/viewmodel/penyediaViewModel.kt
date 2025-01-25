@@ -10,6 +10,10 @@ import com.android.projectakhirpam.ui.viewmodel.kategori.DetailKategoriViewModel
 import com.android.projectakhirpam.ui.viewmodel.kategori.KategoriInsertViewModel
 import com.android.projectakhirpam.ui.viewmodel.kategori.KategoriUpdateViewModel
 import com.android.projectakhirpam.ui.viewmodel.kategori.KategoriViewModel
+import com.android.projectakhirpam.ui.viewmodel.merk.DetailMerkViewModel
+import com.android.projectakhirpam.ui.viewmodel.merk.MerkInsertViewModel
+import com.android.projectakhirpam.ui.viewmodel.merk.MerkUpdateViewModel
+import com.android.projectakhirpam.ui.viewmodel.merk.MerkViewModel
 import com.android.projectakhirpam.ui.viewmodel.pemasok.DetailPemasokViewModel
 import com.android.projectakhirpam.ui.viewmodel.pemasok.PemasokInsertViewModel
 import com.android.projectakhirpam.ui.viewmodel.pemasok.PemasokUpdateViewModel
@@ -35,6 +39,11 @@ object penyediaViewModel {
         initializer { PemasokInsertViewModel(aplikasiProduk().container.pemasokRepository) }
         initializer { DetailPemasokViewModel(createSavedStateHandle(),aplikasiProduk().container.pemasokRepository) }
         initializer { PemasokUpdateViewModel(createSavedStateHandle(),aplikasiProduk().container.pemasokRepository) }
+
+        initializer { MerkViewModel(aplikasiProduk().container.merkRepository) }
+        initializer { MerkInsertViewModel(aplikasiProduk().container.merkRepository) }
+        initializer { DetailMerkViewModel(createSavedStateHandle(),aplikasiProduk().container.merkRepository) }
+        initializer { MerkUpdateViewModel(createSavedStateHandle(),aplikasiProduk().container.merkRepository) }
     }
 
     fun CreationExtras.aplikasiProduk(): ProdukApplications =
