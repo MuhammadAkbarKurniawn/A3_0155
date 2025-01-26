@@ -32,7 +32,7 @@ fun DropdownSelector(
     ) {
         OutlinedTextField(
             value = selectedText,
-            onValueChange = {}, // Tidak perlu perubahan pada input ini
+            onValueChange = {},
             label = { Text(label) },
             modifier = Modifier
                 .menuAnchor() // Anchor untuk dropdown menu agar posisinya benar
@@ -44,9 +44,9 @@ fun DropdownSelector(
         )
         ExposedDropdownMenu(
             expanded = expanded,
-            onDismissRequest = { expanded = false }, // Menutup dropdown ketika klik di luar
+            onDismissRequest = { expanded = false },
             modifier = Modifier
-                .zIndex(1f) // Memberi prioritas z-index lebih tinggi agar dropdown muncul di atas elemen lain
+                .zIndex(1f)
                 .fillMaxWidth() // Pastikan dropdown cukup lebar
         ) {
             items.forEach { item ->

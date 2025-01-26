@@ -111,7 +111,7 @@ fun PemasokStatus(
                     Text("Tidak ada data Kategori.")
                 }
             } else {
-                KategoriList(
+                PemasokList(
                     pemasok = pemasokUiState.pemasok,
                     modifier = modifier.fillMaxWidth(),
                     onDetailClick = {
@@ -128,7 +128,7 @@ fun PemasokStatus(
 }
 
 @Composable
-fun KategoriList(
+fun PemasokList(
     pemasok: List<Pemasok>,
     modifier: Modifier = Modifier,
     onDetailClick: (Pemasok) -> Unit,
