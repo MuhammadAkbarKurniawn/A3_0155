@@ -5,6 +5,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
@@ -37,10 +38,13 @@ fun UpdateScreen(
     val coroutineScope = rememberCoroutineScope()
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
 
-    val uiState = viewModel.updateUiState
     val kategoriList = viewModel.kategoriList
     val pemasokList = viewModel.pemasokList
     val merkList = viewModel.merkList
+
+    if (kategoriList.isEmpty() && pemasokList.isEmpty() && merkList.isEmpty()) {
+        viewModel.loadinitialData()
+    }
 
     Scaffold (
         modifier = modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
@@ -55,7 +59,7 @@ fun UpdateScreen(
     ){ padding ->
         EntryBody(
             modifier = Modifier.padding(padding),
-            onProdukValueChange = viewModel::updateInsertMhsState,
+            onProdukValueChange = viewModel::updateInsertPrdkState,
             insertUiState = viewModel.updateUiState,
             kategoriList = kategoriList,
             pemasokList = pemasokList,

@@ -37,20 +37,35 @@ class UpdateViewModel (
 
     private val _idproduk: String = checkNotNull(savedStateHandle[DestinasiUpdate.IDPRODUK])
 
+
     init {
+        loadinitialData()
+    }
+
+    fun loadinitialData() {
         viewModelScope.launch {
-            updateUiState = produkRepository.getProdukById(_idproduk)
-                .toUiStatePrdk()
+            try {
+                val produk = produkRepository.getProdukById(_idproduk)
+                updateUiState = produk.toUiStatePrdk()
 
-            // Fetch dropdown data
-            kategoriList = kategoriRepository.getAllKategori().data
-            pemasokList = pemasokRepository.getAllPemasok().data
-            merkList = merkRepository.getAllMerk().data
+                val kategoriResponse = kategoriRepository.getAllKategori()
+                kategoriList = kategoriResponse.data
 
+
+                val pemasokResponse = pemasokRepository.getAllPemasok()
+                pemasokList = pemasokResponse.data
+
+                val merkResponse = merkRepository.getAllMerk()
+                merkList = merkResponse.data
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
         }
     }
 
-    fun updateInsertMhsState(insertUiEvent: InsertUiEvent){
+
+
+    fun updateInsertPrdkState(insertUiEvent: InsertUiEvent){
         updateUiState = InsertUiState(insertUiEvent = insertUiEvent)
     }
 
