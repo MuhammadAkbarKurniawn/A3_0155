@@ -6,7 +6,11 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.android.projectakhirpam.model.Merk
 import com.android.projectakhirpam.model.Produk
+import com.android.projectakhirpam.repository.KategoriRepository
+import com.android.projectakhirpam.repository.MerkRepository
+import com.android.projectakhirpam.repository.PemasokRepository
 import com.android.projectakhirpam.repository.ProdukRepository
 import com.android.projectakhirpam.ui.view.produk.DestinasiDetail
 import kotlinx.coroutines.launch
@@ -21,9 +25,19 @@ sealed class DetailUiState {
 
 class DetailViewModel (
     savedStateHandle: SavedStateHandle,
-    private val produkRepository: ProdukRepository
+    private val produkRepository: ProdukRepository,
+    private val kategoriRepository: KategoriRepository,
+    private val pemasokRepository: PemasokRepository,
+    private val merkRepository: MerkRepository
 ) : ViewModel(){
-    var mahasiswaDetailState: DetailUiState by mutableStateOf(DetailUiState.Loading)
+    var produkDetailState: DetailUiState by mutableStateOf(DetailUiState.Loading)
+        private set
+
+    var namaKategori: String by mutableStateOf("")
+        private set
+    var namaPemasok: String by mutableStateOf("")
+        private set
+    var namaMerk: String by mutableStateOf("")
         private set
 
     private val _idproduk: String = checkNotNull(savedStateHandle[DestinasiDetail.IDPRODUK])
@@ -34,10 +48,22 @@ class DetailViewModel (
 
     fun getDetailProduk() {
         viewModelScope.launch {
-            mahasiswaDetailState = DetailUiState.Loading
-            mahasiswaDetailState = try {
+            produkDetailState = DetailUiState.Loading
+            try {
                 val produk = produkRepository.getProdukById(_idproduk)
-                DetailUiState.Success(produk)
+                produkDetailState = DetailUiState.Success(produk)
+
+                // Ambil data kategori, pemasok, dan merk
+                val kategori = kategoriRepository.getKategoriById(produk.idKategori)
+                val pemasok = pemasokRepository.getPemasokById(produk.idPemasok)
+                val merk = merkRepository.getMerkById(produk.idMerk)
+
+                // Ambil nama untuk masing-masing
+                namaKategori = kategori.namaKategori
+                namaPemasok = pemasok.namaPemasok
+                namaMerk = merk.namaMerk
+
+
             } catch (e: IOException) {
                 DetailUiState.Error
             } catch (e: HttpException) {

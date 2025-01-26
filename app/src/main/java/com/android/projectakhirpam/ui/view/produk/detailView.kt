@@ -78,11 +78,14 @@ fun DetailScreen(
     ) { innerPadding ->
         DetailStatus(
             modifier = Modifier.padding(innerPadding),
-            detailUiState = viewModel.mahasiswaDetailState,
+            detailUiState = viewModel.produkDetailState,
             retryAction = { viewModel.getDetailProduk() },
             navigateToHomeKategori = navigateToHomeKategori,
             navigateToHomePemasok = navigateToHomePemasok,
-            navigateToHomeMerk = navigateToHomeMerk
+            navigateToHomeMerk = navigateToHomeMerk,
+            namaKategori = viewModel.namaKategori,
+            namaPemasok = viewModel.namaPemasok,
+            namaMerk = viewModel.namaMerk
         )
     }
 }
@@ -94,7 +97,10 @@ fun DetailStatus(
     detailUiState: DetailUiState,
     navigateToHomeKategori: () -> Unit,
     navigateToHomePemasok: () -> Unit,
-    navigateToHomeMerk: () -> Unit
+    navigateToHomeMerk: () -> Unit,
+    namaKategori: String,
+    namaPemasok: String,
+    namaMerk: String
 ) {
     when (detailUiState) {
         is DetailUiState.Loading -> OnLoading(modifier = modifier.fillMaxSize())
@@ -113,7 +119,10 @@ fun DetailStatus(
                     modifier = modifier.fillMaxWidth(),
                     navigateToHomeKategori = navigateToHomeKategori,
                     navigateToHomePemasok = navigateToHomePemasok,
-                    navigateToHomeMerk = navigateToHomeMerk
+                    navigateToHomeMerk = navigateToHomeMerk,
+                    namaKategori = namaKategori,
+                    namaPemasok = namaPemasok,
+                    namaMerk = namaMerk
                 )
             }
         }
@@ -128,7 +137,10 @@ fun ItemDetailPrdk(
     modifier: Modifier,
     navigateToHomeKategori: () -> Unit,
     navigateToHomePemasok: () -> Unit,
-    navigateToHomeMerk: () -> Unit
+    navigateToHomeMerk: () -> Unit,
+    namaKategori: String,
+    namaPemasok: String,
+    namaMerk: String
 ) {
     Column(
         modifier = Modifier
@@ -152,11 +164,11 @@ fun ItemDetailPrdk(
                 Spacer(modifier = Modifier.padding(4.dp))
                 ComponentDetailProduk(judul = "Harga", isinya = produk.harga)
                 Spacer(modifier = Modifier.padding(4.dp))
-                ComponentDetailProduk(judul = "id Kategori", isinya = produk.idKategori)
+                ComponentDetailProduk(judul = "Kategori", isinya = namaKategori)
                 Spacer(modifier = Modifier.padding(4.dp))
-                ComponentDetailProduk(judul = "id Pemasok", isinya = produk.idPemasok)
+                ComponentDetailProduk(judul = "Pemasok", isinya = namaPemasok)
                 Spacer(modifier = Modifier.padding(4.dp))
-                ComponentDetailProduk(judul = "id Merk", isinya = produk.idMerk)
+                ComponentDetailProduk(judul = "Merk", isinya = namaMerk)
             }
         }
         Button(

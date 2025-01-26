@@ -31,7 +31,11 @@ object penyediaViewModel {
             aplikasiProduk().container.kategoriRepository,
             aplikasiProduk().container.pemasokRepository,
             aplikasiProduk().container.merkRepository) }
-        initializer { DetailViewModel(createSavedStateHandle(),aplikasiProduk().container.produkRepository) }
+        initializer { DetailViewModel(createSavedStateHandle(),
+            aplikasiProduk().container.produkRepository,
+            aplikasiProduk().container.kategoriRepository,
+            aplikasiProduk().container.pemasokRepository,
+            aplikasiProduk().container.merkRepository) }
         initializer { UpdateViewModel(createSavedStateHandle(),
             aplikasiProduk().container.produkRepository,
             aplikasiProduk().container.kategoriRepository,
