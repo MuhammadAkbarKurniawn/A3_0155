@@ -42,7 +42,7 @@ fun UpdatePemasokScreen(
         modifier = modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
             CostumeTopAppBar(
-                title = DestinasiUpdate.titleRes,
+                title = DestinasiUpdatePemasok.titleRes,
                 canNavigateBack = true,
                 scrollBehavior = scrollBehavior,
                 navigateUp = onBack,
