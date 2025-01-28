@@ -14,6 +14,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.zIndex
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DropdownSelector(
@@ -25,6 +26,11 @@ fun DropdownSelector(
 ) {
     var expanded by remember { mutableStateOf(false) } // State untuk mengatur apakah dropdown terbuka
     var selectedText by remember { mutableStateOf(selectedItem) } // State untuk teks terpilih
+
+    // Memastikan selectedText diperbarui dengan benar
+    if (selectedText != selectedItem) {
+        selectedText = selectedItem
+    }
 
     ExposedDropdownMenuBox(
         expanded = expanded,

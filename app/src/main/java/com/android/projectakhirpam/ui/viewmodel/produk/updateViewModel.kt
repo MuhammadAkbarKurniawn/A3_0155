@@ -51,19 +51,29 @@ class UpdateViewModel (
                 val kategoriResponse = kategoriRepository.getAllKategori()
                 kategoriList = kategoriResponse.data
 
-
                 val pemasokResponse = pemasokRepository.getAllPemasok()
                 pemasokList = pemasokResponse.data
 
                 val merkResponse = merkRepository.getAllMerk()
                 merkList = merkResponse.data
+
+                val selectedKategori = kategoriList.find { it.idKategori == produk.idKategori }
+                val selectedPemasok = pemasokList.find { it.idPemasok == produk.idPemasok }
+                val selectedMerk = merkList.find { it.idMerk == produk.idMerk }
+
+                // Update the InsertUiEvent to reflect the selected items
+                updateUiState = updateUiState.copy(
+                    insertUiEvent = updateUiState.insertUiEvent.copy(
+                        idKategori = selectedKategori?.idKategori.orEmpty(),
+                        idPemasok = selectedPemasok?.idPemasok.orEmpty(),
+                        idMerk = selectedMerk?.idMerk.orEmpty()
+                    )
+                )
             } catch (e: Exception) {
                 e.printStackTrace()
             }
         }
     }
-
-
 
     fun updateInsertPrdkState(insertUiEvent: InsertUiEvent){
         updateUiState = InsertUiState(insertUiEvent = insertUiEvent)

@@ -5,14 +5,12 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.android.projectakhirpam.ui.customwidget.CostumeTopAppBar
 import com.android.projectakhirpam.ui.navigation.DestinasiNavigasi
-import com.android.projectakhirpam.ui.view.kategori.KategoriList
 import com.android.projectakhirpam.ui.viewmodel.penyediaViewModel
 import com.android.projectakhirpam.ui.viewmodel.produk.UpdateViewModel
 import kotlinx.coroutines.Dispatchers
@@ -31,10 +29,10 @@ object DestinasiUpdate : DestinasiNavigasi {
 @Composable
 fun UpdateScreen(
     onBack: () -> Unit,
-    onNavigate:()-> Unit,
+    onNavigate: () -> Unit,
     modifier: Modifier = Modifier,
     viewModel: UpdateViewModel = viewModel(factory = penyediaViewModel.Factory)
-){
+) {
     val coroutineScope = rememberCoroutineScope()
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
 
@@ -42,11 +40,7 @@ fun UpdateScreen(
     val pemasokList = viewModel.pemasokList
     val merkList = viewModel.merkList
 
-    if (kategoriList.isEmpty() && pemasokList.isEmpty() && merkList.isEmpty()) {
-        viewModel.loadinitialData()
-    }
-
-    Scaffold (
+    Scaffold(
         modifier = modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
             CostumeTopAppBar(
@@ -56,7 +50,7 @@ fun UpdateScreen(
                 navigateUp = onBack,
             )
         }
-    ){ padding ->
+    ) { padding ->
         EntryBody(
             modifier = Modifier.padding(padding),
             onProdukValueChange = viewModel::updateInsertPrdkState,
@@ -68,7 +62,7 @@ fun UpdateScreen(
                 coroutineScope.launch {
                     viewModel.updatePrdk()
                     delay(600)
-                    withContext(Dispatchers.Main){
+                    withContext(Dispatchers.Main) {
                         onNavigate()
                     }
                 }

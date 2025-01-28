@@ -191,40 +191,43 @@ fun FormInput(
             singleLine = true
         )
 
-        // Dropdown for Kategori
+        // Dropdown untuk Kategori
         DropdownSelector(
             label = "Kategori",
             items = kategoriList.map { it.namaKategori },
             selectedItem = kategoriList.find { it.idKategori == insertUiEvent.idKategori }?.namaKategori.orEmpty(),
             onItemSelected = { selected ->
-                val selectedKategori = kategoriList.find { it.namaKategori == selected }
-                onValueChange(insertUiEvent.copy(idKategori = selectedKategori?.idKategori.orEmpty()))
+                kategoriList.find { it.namaKategori == selected }?.let { selectedKategori ->
+                    onValueChange(insertUiEvent.copy(idKategori = selectedKategori.idKategori))
+                }
             },
-            enabled = enabled
+            enabled = kategoriList.isNotEmpty() && enabled
         )
 
-        // Dropdown for Pemasok
+        // Dropdown untuk Pemasok
         DropdownSelector(
             label = "Pemasok",
             items = pemasokList.map { it.namaPemasok },
             selectedItem = pemasokList.find { it.idPemasok == insertUiEvent.idPemasok }?.namaPemasok.orEmpty(),
             onItemSelected = { selected ->
-                val selectedPemasok = pemasokList.find { it.namaPemasok == selected }
-                onValueChange(insertUiEvent.copy(idPemasok = selectedPemasok?.idPemasok.orEmpty()))
+                pemasokList.find { it.namaPemasok == selected }?.let { selectedPemasok ->
+                    onValueChange(insertUiEvent.copy(idPemasok = selectedPemasok.idPemasok))
+                }
             },
-            enabled = enabled
+            enabled = pemasokList.isNotEmpty() && enabled
         )
 
-        // Dropdown for Merk
+        // Dropdown untuk Merk
         DropdownSelector(
             label = "Merk",
             items = merkList.map { it.namaMerk },
             selectedItem = merkList.find { it.idMerk == insertUiEvent.idMerk }?.namaMerk.orEmpty(),
             onItemSelected = { selected ->
-                val selectedMerk = merkList.find { it.namaMerk == selected }
-                onValueChange(insertUiEvent.copy(idMerk = selectedMerk?.idMerk.orEmpty()))
+                merkList.find { it.namaMerk == selected }?.let { selectedMerk ->
+                    onValueChange(insertUiEvent.copy(idMerk = selectedMerk.idMerk))
+                }
             },
-            enabled = enabled
+            enabled = merkList.isNotEmpty() && enabled
         )
     }
 }
