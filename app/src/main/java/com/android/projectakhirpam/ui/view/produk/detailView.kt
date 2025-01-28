@@ -162,7 +162,7 @@ fun ItemDetailPrdk(
                 Spacer(modifier = Modifier.padding(4.dp))
                 ComponentDetailProduk(judul = "Stok", isinya = produk.stok)
                 Spacer(modifier = Modifier.padding(4.dp))
-                ComponentDetailProduk(judul = "Harga", isinya = produk.harga)
+                ComponentDetailProduk(judul = "Harga", isinya = "Rp. ${produk.harga}")
                 Spacer(modifier = Modifier.padding(4.dp))
                 ComponentDetailProduk(judul = "Kategori", isinya = namaKategori)
                 Spacer(modifier = Modifier.padding(4.dp))

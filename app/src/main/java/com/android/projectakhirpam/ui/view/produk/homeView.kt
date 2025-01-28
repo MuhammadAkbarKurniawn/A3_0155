@@ -232,11 +232,11 @@ fun ProdukCard(
                 style = MaterialTheme.typography.titleMedium
             )
             Text(
-                text = produk.stok,
+                text = "Stok : ${produk.stok}",
                 style = MaterialTheme.typography.titleMedium
             )
             Text(
-                text = produk.harga,
+                text = "Rp. ${produk.harga}",
                 style = MaterialTheme.typography.titleMedium
             )
         }
