@@ -30,8 +30,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
 import com.android.projectakhirpam.model.Merk
 import com.android.projectakhirpam.model.Pemasok
+import com.android.projectakhirpam.ui.customwidget.BottomNavBar
 import com.android.projectakhirpam.ui.customwidget.CostumeTopAppBar
 import com.android.projectakhirpam.ui.navigation.DestinasiNavigasi
 import com.android.projectakhirpam.ui.view.produk.OnError
@@ -52,6 +54,7 @@ fun HomeMerkScreen(
     navigateToKategoriEntry: () -> Unit,
     modifier: Modifier = Modifier,
     onDetailClick:(String) -> Unit = {},
+    navController: NavController,
     viewModel: MerkViewModel = viewModel(factory = penyediaViewModel.Factory)
 ) {
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
@@ -77,6 +80,9 @@ fun HomeMerkScreen(
             ) {
                 Icon(imageVector = Icons.Default.Add, contentDescription = "Add Kategori")
             }
+        },
+        bottomBar = {
+            BottomNavBar(navController = navController)
         }
     ) { innerPadding ->
         MerkStatus(

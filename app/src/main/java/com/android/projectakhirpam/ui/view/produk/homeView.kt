@@ -38,8 +38,10 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role.Companion.Image
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
 import com.android.projectakhirpam.R
 import com.android.projectakhirpam.model.Produk
+import com.android.projectakhirpam.ui.customwidget.BottomNavBar
 import com.android.projectakhirpam.ui.customwidget.CostumeTopAppBar
 import com.android.projectakhirpam.ui.navigation.DestinasiNavigasi
 import com.android.projectakhirpam.ui.viewmodel.penyediaViewModel
@@ -57,6 +59,7 @@ fun HomeScreen(
     navigateToItemEntry: () -> Unit,
     modifier: Modifier = Modifier,
     onDetailClick:(String) -> Unit = {},
+    navController: NavController,
     viewModel : HomeViewModel = viewModel(factory = penyediaViewModel.Factory)
 ){
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
@@ -82,6 +85,9 @@ fun HomeScreen(
                 Icon(imageVector = Icons.Default.Add, contentDescription = "Add Produk")
             }
         },
+        bottomBar = {
+            BottomNavBar(navController = navController)
+        }
     ){innerPadding->
         HomeStatus(
             homeUiState = viewModel.prdkUIState,

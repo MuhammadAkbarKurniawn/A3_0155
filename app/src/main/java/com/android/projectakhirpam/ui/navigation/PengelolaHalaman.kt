@@ -54,6 +54,7 @@ fun PengelolaHalaman(
         composable(DestinasiHome.route){
             HomeScreen(
                 navigateToItemEntry = { navController.navigate(DestinasiEntry.route) },
+                navController = navController,
                 onDetailClick = {idproduk ->
                     navController.navigate("${DestinasiDetail.route}/$idproduk")
                     println("PengelolaHalaman: idproduk = $idproduk")
@@ -141,6 +142,7 @@ fun PengelolaHalaman(
                     navController.navigate("${DestinasiDetailKategori.route}/$idkategori")
                     println("PengelolaHalaman: idkategori = $idkategori")
                 },
+                navController = navController,
                 navigateToKategoriEntry = {
                     navController.navigate(DestinasiEntryKategori.route)
                 }
@@ -217,6 +219,7 @@ fun PengelolaHalaman(
                     navController.navigate("${DestinasiDetailPemasok.route}/$idpemasok")
                     println("PengelolaHalaman: idpemasok = $idpemasok")
                 },
+                navController = navController,
                 navigateToKategoriEntry = {
                     navController.navigate(DestinasiEntryPemasok.route)
                 }
@@ -294,6 +297,7 @@ fun PengelolaHalaman(
                     navController.navigate("${DestinasiDetailMerk.route}/$idmerk")
                     println("PengelolaHalaman: idmerk = $idmerk")
                 },
+                navController = navController,
                 navigateToKategoriEntry = {
                     navController.navigate(DestinasiEntryMerk.route)
                 }
