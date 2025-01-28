@@ -176,19 +176,30 @@ fun FormInput(
         )
         OutlinedTextField(
             value = insertUiEvent.stok,
-            onValueChange = { onValueChange(insertUiEvent.copy(stok = it)) },
+            onValueChange = { newStok ->
+                if (newStok.all { it.isDigit() }) {
+                    onValueChange(insertUiEvent.copy(stok = newStok))
+                }
+            },
             label = { Text("Stok") },
             modifier = Modifier.fillMaxWidth(),
             enabled = enabled,
-            singleLine = true
+            singleLine = true,
+            keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number)
         )
+
         OutlinedTextField(
             value = insertUiEvent.harga,
-            onValueChange = { onValueChange(insertUiEvent.copy(harga = it)) },
+            onValueChange = { newHarga ->
+                if (newHarga.all { it.isDigit() }) {
+                    onValueChange(insertUiEvent.copy(harga = newHarga))
+                }
+            },
             label = { Text("Harga") },
             modifier = Modifier.fillMaxWidth(),
             enabled = enabled,
-            singleLine = true
+            singleLine = true,
+            keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number)
         )
 
         // Dropdown untuk Kategori
