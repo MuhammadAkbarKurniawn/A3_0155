@@ -135,7 +135,12 @@ fun FormInput(
         )
         OutlinedTextField(
             value = pmskInsertUiEvent.teleponPemasok,
-            onValueChange = {onValueChange(pmskInsertUiEvent.copy(teleponPemasok = it))},
+            onValueChange = { newValue ->
+                // Validate that the new value is numeric
+                if (newValue.all { it.isDigit() }) {
+                    onValueChange(pmskInsertUiEvent.copy(teleponPemasok = newValue))
+                }
+            },
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
             label = { Text("Telepon Pemasok") },
             modifier = Modifier.fillMaxWidth(),
