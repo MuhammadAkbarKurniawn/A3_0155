@@ -47,4 +47,5 @@ Detail Merk
 ![Screenshot 2025-01-29 090743](https://github.com/user-attachments/assets/d1c671ab-2e95-4d46-b5b2-73046b6b3aa9)
 
 Update Merk
-![Screenshot 2025-01-29 090743](https://github.com/user-attachments/assets/7c786f48-0cfa-4e3a-a6e5-7d6dc094de29)
+![Screenshot 2025-01-29 090753](https://github.com/user-attachments/assets/4888a69d-a8b8-4aed-85de-63f78d40d3bc)
+
